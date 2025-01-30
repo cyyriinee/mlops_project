@@ -7,3 +7,4 @@ imblearn
 xgboost
 joblib
 flake8
+pytest
