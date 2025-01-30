@@ -1,6 +1,12 @@
 name: CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,9 +25,20 @@ jobs:
       run: |
         python -m venv venv
         source venv/bin/activate
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Lint code
+      run: |
+        source venv/bin/activate
+        flake8 . --exclude=venv --max-line-length=100
 
     - name: Run tests
       run: |
         source venv/bin/activate
         pytest
+
+    - name: Execute Makefile (if applicable)
+      run: |
+        make all
+
