@@ -38,14 +38,3 @@ jobs:
         source venv/bin/activate
         pytest
 
-    - name: Execute Makefile (if applicable)
-      run: |
-        make all
-
-    - name: Save Test Results
-      if: always()
-      uses: actions/upload-artifact@v3.1.0
-      with:
-        name: test-results
-        path: ./path/to/test-results/
-
